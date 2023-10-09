@@ -51,7 +51,7 @@ namespace CountryClubAPI.Controllers
         {
             _context.Members.Update(member);
             _context.SaveChanges();
-            Response.StatusCode = 204;
+            //Response.StatusCode = 204;
 
             return new JsonResult(member);
         }
@@ -63,9 +63,11 @@ namespace CountryClubAPI.Controllers
 
             _context.Members.Remove(member);
             _context.SaveChanges();
-            Response.StatusCode = 204;
+            var members = _context.Members;
 
-            return new JsonResult(_context.Members);
+            //Response.StatusCode = 204;
+
+            return new JsonResult(members);
         }
 
 
