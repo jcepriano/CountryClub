@@ -45,5 +45,16 @@ namespace CountryClubAPI.Controllers
 
             return new JsonResult(member);
         }
+
+        [HttpPut("{id}")]
+        public ActionResult EditBook(Member member)
+        {
+            _context.Members.Update(member);
+            _context.SaveChanges();
+            Response.StatusCode = 204;
+
+            return new JsonResult(member);
+        }
+
     }
 }
