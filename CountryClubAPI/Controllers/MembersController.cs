@@ -1,6 +1,7 @@
 ﻿using CountryClubAPI.DataAccess;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using CountryClubAPI.Models;
 
 namespace CountryClubAPI.Controllers
 {
@@ -26,6 +27,22 @@ namespace CountryClubAPI.Controllers
         public ActionResult GetMember(int id)
         {
             var member = _context.Members.Find(id);
+            return new JsonResult(member);
+        }
+
+        [HttpPost]
+        public ActionResult CreateMemeber(Member member)
+        {
+            if(!ModelState.IsValid)
+            {
+                Response.StatusCode = 400;
+                return BadRequest();
+            }
+
+            _context.Members.Add(member);
+            _context.SaveChanges();
+            Response.StatusCode = 201;
+
             return new JsonResult(member);
         }
     }
