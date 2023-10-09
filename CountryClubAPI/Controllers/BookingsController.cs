@@ -25,15 +25,8 @@ namespace CountryClubAPI.Controllers
         [HttpPost]
         public ActionResult CreateBooking(Booking booking)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    Response.StatusCode = 400;
-            //    return BadRequest();
-            //}
-
             _context.Bookings.Add(booking);
             _context.SaveChanges();
-            //Response.StatusCode = 201;
 
             return new JsonResult(booking);
 
