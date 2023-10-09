@@ -31,7 +31,7 @@ namespace CountryClubAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateMemeber(Member member)
+        public ActionResult CreateMember(Member member)
         {
             if(!ModelState.IsValid)
             {
@@ -47,7 +47,7 @@ namespace CountryClubAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult EditBook(Member member)
+        public ActionResult EditMember(Member member)
         {
             _context.Members.Update(member);
             _context.SaveChanges();
@@ -55,6 +55,19 @@ namespace CountryClubAPI.Controllers
 
             return new JsonResult(member);
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteMember(int id)
+        {
+            var member = _context.Members.Find(id);
+
+            _context.Members.Remove(member);
+            _context.SaveChanges();
+            Response.StatusCode = 204;
+
+            return new JsonResult(_context.Members);
+        }
+
 
     }
 }
